@@ -1,0 +1,68 @@
+*, *::before, *::after {
+  box-sizing: border-box
+}
+
+body {
+  display: flex;
+  background-color: lightblue;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+}
+
+h1 {
+
+  color: white;
+}
+
+.avatar {
+  width: 500px;
+  height: 500px;
+  border-radius: 50%;
+  background-image: url('https://images2.minutemediacdn.com/image/upload/c_fit,f_auto,fl_lossy,q_auto,w_728/v1555921297/shape/mentalfloss/garfield_with_odie.png?itok=DdfquP35');
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+.avatar::before,
+.avatar::after {
+  --scale: 0;
+  --arrow-size: 20px;
+  --greeting-color: black;
+
+  position: absolute;
+  top: -.25rem;
+  left: 50%;
+  transform: translateX(-50%) translateY(var(--translate-y, 0)) scale(var(--scale));
+  transition: 150ms transform;
+  transform-origin: bottom center;
+}
+
+.avatar::before {
+  --translate-y: calc(-100% - var(--arrow-size));
+
+  content: attr(greeting);
+  color: white;
+  padding: .5rem;
+  border-radius: .3rem;
+  text-align: center;
+  width: max-content;
+  max-width: 100%;
+  background: #333;
+}
+
+.avatar:hover::before,
+.avatar:hover::after {
+  --scale: 1;
+}
+
+.avatar::after {
+  --translate-y: calc(-1 * var(--arrow-size));
+
+  content: '';
+  border: var(--arrow-size) solid transparent;
+  border-top-color: var(--greeting-color);
+  transform-origin: top center;
+}
